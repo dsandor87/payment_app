@@ -1,0 +1,19 @@
+{
+  "name": "payment_app",
+  "version": "1.0.0",
+  "description": "Payment_app",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsandor87/payment_app.git"
+  },
+  "author": "Ben, Noah, Sandor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsandor87/payment_app/issues"
+  },
+  "homepage": "https://github.com/dsandor87/payment_app#readme"
+}
