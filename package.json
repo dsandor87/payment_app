@@ -4,6 +4,7 @@
   "description": "Payment_app",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "npm start"
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/dsandor87/payment_app/issues"
   },
-  "homepage": "https://github.com/dsandor87/payment_app#readme"
+  "homepage": "https://github.com/dsandor87/payment_app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-openid-connect": "^2.2.1",
+    "sequelize": "^6.5.0",
+    "sqlite3": "^5.0.1"
+  }
 }
