@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
-const { sequelize } = require('./models')
+const { User, Transaction, Friends, sequelize } = require('./models')
 const { auth } = require('express-openid-connect')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
@@ -28,18 +28,22 @@ app.use(auth(openIDconfig))
 // app.get('/callback') this is created by express-openid-connect and fetches an authenticated user their token
 // app.get('/logout') this is created by express-openid-connect and will end a users token based session
 
-app.get('/', (req, res) => {
-    if (req.oidc.user) {
-    res.redirect('/dashboard')
+app.get('/', async (req, res) => {
+    console.log(req.oidc.user)
+
+    const user = await User.create({email: req.oidc.user.email, name: req.oidc.user.name, balance: 0})
+    if (user) {
+    res.render('dashboard', {user})
+    
     } else {
         res.send("no user")
     }
 })
 
-app.get('/dashboard', (req, res) => {
-    const user = req.oidc.user
-    res.render('dashboard', {user})
-})
+// app.get('/dashboard', (req, res) => {
+
+//     res.render('dashboard', {user})
+// })
 
 app.listen(3000, () => {
     sequelize.sync().then(() => console.log("All ready for banking"))
