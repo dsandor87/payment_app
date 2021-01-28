@@ -1,7 +1,15 @@
 const express = require('express')
 const app = express()
+const Handlebars = require('handlebars')
+const expressHandlebars = require('express-handlebars')
 const { sequelize } = require('./models')
 const { auth } = require('express-openid-connect')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+
+
+const handlebars = expressHandlebars({
+    handlebars: allowInsecurePrototypeAccess(Handlebars)
+})
 
 const openIDconfig = {
     authRequired: false,
@@ -11,7 +19,9 @@ const openIDconfig = {
     clientID: 'dFHtLvHeKYiczIEE5nRPltX3W4Fawntl',
   issuerBaseURL: 'https://dev-yb35qxkb.eu.auth0.com'}
 
+app.set('view engine', 'handlebars')
 app.use(express.json())
+app.engine('handlebars', handlebars)
 app.use(auth(openIDconfig))
 
 // app.get('/login') this is created by express-openid-connect and displays a login widget
@@ -19,7 +29,16 @@ app.use(auth(openIDconfig))
 // app.get('/logout') this is created by express-openid-connect and will end a users token based session
 
 app.get('/', (req, res) => {
-    res.send(req.oidc.user || "No user logged in")
+    if (req.oidc.user) {
+    res.redirect('/dashboard')
+    } else {
+        res.send("no user")
+    }
+})
+
+app.get('/dashboard', (req, res) => {
+    const user = req.oidc.user
+    res.render('dashboard', {user})
 })
 
 app.listen(3000, () => {
