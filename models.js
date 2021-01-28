@@ -12,11 +12,15 @@ User.init({
     friends: DataTypes.ARRAY,
 }, {sequelize: sequelize})
 
+class Transaction extends Model {}
+
 Transaction.init({
     from: DataTypes.STRING,
     to: DataTypes.STRING,
     amount: DataTypes.FLOAT
 })
+
+User.hasMany(Transaction)
 
 module.exports = {
     User, sequelize, Transaction

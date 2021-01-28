@@ -1,8 +1,13 @@
 const express = require('express')
 const app = express()
 const Handlebars = require('handlebars')
+const expressHandlebars = require('express-handlebars')
 const { sequelize } = require('./models')
 const { auth } = require('express-openid-connect')
+
+const handlebars = expressHandlebars({
+    handlebars: allowInsecurePrototypeAccess(Handlebars)
+})
 
 const openIDconfig = {
     authRequired: false,
