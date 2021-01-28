@@ -4,7 +4,7 @@
   "description": "Payment_app",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "npm start"
   },
   "repository": {
@@ -25,5 +25,8 @@
     "handlebars": "^4.7.6",
     "sequelize": "^6.5.0",
     "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
