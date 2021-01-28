@@ -1,11 +1,10 @@
 const {Model, DataTypes, Sequelize} = require('sequelize')
 const sequelize = new Sequelize("sqlite:./db.sql", {logging: false})
 
-class User extends Model {}
+class UserMetadata extends Model {}
 
-User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
+UserMetadata.init({
+    sub: DataTypes.STRING,
     balance: DataTypes.FLOAT,
 }, {sequelize: sequelize})
 
@@ -23,9 +22,9 @@ Friends.init({
     email: DataTypes.STRING,
 }, {sequelize: sequelize})
 
-User.hasMany(Transaction)
-User.hasMany(Friends)
+UserMetadata.hasMany(Transaction)
+UserMetadata.hasMany(Friends)
 
 module.exports = {
-    User, sequelize, Transaction, Friends
+    UserMetadata, sequelize, Transaction, Friends
 }
