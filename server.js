@@ -19,6 +19,7 @@ const openIDconfig = {
     clientID: 'dFHtLvHeKYiczIEE5nRPltX3W4Fawntl',
   issuerBaseURL: 'https://dev-yb35qxkb.eu.auth0.com'}
 
+app.set('view engine', 'handlebars')
 app.use(express.json())
 app.engine('handlebars', handlebars)
 app.use(auth(openIDconfig))
