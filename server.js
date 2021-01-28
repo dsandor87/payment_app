@@ -11,6 +11,10 @@ const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars)
 })
 
+if(process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+  }
+
 const openIDconfig = {
     authRequired: false,
     auth0Logout: true,
@@ -57,7 +61,7 @@ app.post('/addfunds/:id', async (req, res) => {
     res.redirect('/')
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     sequelize.sync(() => {
         console.log('Kanban app running on port', process.env.PORT)
     })

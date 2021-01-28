@@ -21,6 +21,7 @@
   "homepage": "https://github.com/dsandor87/payment_app#readme",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-openid-connect": "^2.2.1",
