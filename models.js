@@ -1,4 +1,4 @@
-const {Model, DataTypes, Sequelize} = require('sequelize')
+const {Model, DataTypes, Sequelize, Transaction} = require('sequelize')
 const sequelize = new Sequelize("sqlite:./db.sql", {logging: false})
 
 class User extends Model {}
@@ -12,6 +12,12 @@ User.init({
     friends: DataTypes.ARRAY,
 }, {sequelize: sequelize})
 
+Transaction.init({
+    from: DataTypes.STRING,
+    to: DataTypes.STRING,
+    amount: DataTypes.FLOAT
+})
+
 module.exports = {
-    User, sequelize
+    User, sequelize, Transaction
 }
