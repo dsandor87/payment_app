@@ -44,7 +44,7 @@ app.get('/', async (req, res) => {
     }
 })
 
-app.get('/addfunds/:id', (req, res)=> {
+app.get('/addfunds/:id', async (req, res)=> {
     const userMetadata = await UserMetadata.findOne({where: { id: req.params.id}})
     res.render('addfunds', {userMetadata})
 })
