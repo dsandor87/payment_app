@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/dsandor87/payment_app#readme",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
     "express-openid-connect": "^2.2.1",
+    "handlebars": "^4.7.6",
     "sequelize": "^6.5.0",
     "sqlite3": "^5.0.0"
   }

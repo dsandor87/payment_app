@@ -4,6 +4,8 @@ const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
 const { sequelize } = require('./models')
 const { auth } = require('express-openid-connect')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+
 
 const handlebars = expressHandlebars({
     handlebars: allowInsecurePrototypeAccess(Handlebars)
@@ -26,8 +28,11 @@ app.use(auth(openIDconfig))
 // app.get('/logout') this is created by express-openid-connect and will end a users token based session
 
 app.get('/', (req, res) => {
-    req.oidc.user 
+    if (req.oidc.user) {
     res.redirect('/dashboard')
+    } else {
+        res.send("no user")
+    }
 })
 
 app.get('/dashboard', (req, res) => {
