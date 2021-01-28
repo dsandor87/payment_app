@@ -29,7 +29,7 @@ app.use(auth(openIDconfig))
 // app.get('/callback') this is created by express-openid-connect and fetches an authenticated user their token
 // app.get('/logout') this is created by express-openid-connect and will end a users token based session
 
-app.get('/home', async (req, res) => {
+app.get('/', async (req, res) => {
     const user = req.oidc.user
     let doesUserExist = await UserMetadata.findOne({where: { sub: user.sub}})
     if (doesUserExist === null){
@@ -54,7 +54,7 @@ app.post('/addfunds/:id', async (req, res) => {
     const value = parseInt(req.body.value, 10) + userMetadata.balance
     console.log(req.body)
     await userMetadata.update({balance: value})
-    res.redirect('/home')
+    res.redirect('/')
 })
 
 app.listen(process.env.PORT, () => {
