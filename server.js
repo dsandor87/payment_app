@@ -33,9 +33,8 @@ app.get('/', async (req, res) => {
     if (doesUserExist.length == 0){
     await User.create({email: req.oidc.user.email, name: req.oidc.user.name, balance: 0})
     }
-    const userArray = await User.findAll({where: { name:req.oidc.user.name, email:req.oidc.user.email }})
-    console.log(userArray)
-    const user = userArray[0]
+    const user= await User.findOne({where: { name:req.oidc.user.name, email:req.oidc.user.email }})
+    console.log(user)
     if (user) {
     res.render('dashboard', {user})
     
