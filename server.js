@@ -44,6 +44,20 @@ app.get('/', async (req, res) => {
     }
 })
 
+app.get('/addfunds/:id', (req, res)=> {
+    const userMetadata = await UserMetadata.findOne({where: { id: req.params.id}})
+    res.render('addfunds', {userMetadata})
+})
+
+
+app.post('/addfunds/:id', async (req, res) => {
+    const userMetadata = await UserMetadata.findOne({where: { id: req.params.id}})
+    const user = await UserMetadata.findOne({where: { sub: userMetadata.sub}})
+    const value = req.body.value
+    await userMetadata.update({balance: userMetadata.balance + value})
+    res.redirect('dashboard', {userMetadata ,user})
+})
+
 app.listen(3000, () => {
     sequelize.sync().then(() => console.log("All ready for banking"))
 })
