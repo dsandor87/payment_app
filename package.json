@@ -4,8 +4,10 @@
   "description": "Payment_app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "npm start"
+    "start": "node server.js",
+    "watch": "NODE_ENV=dev PORT=3000 nodemon server.js",
+    "test": "PORT=3001 jest --watchAll",
+    "test:cypress": "PORT=3001 cypress open"
   },
   "repository": {
     "type": "git",
@@ -23,10 +25,15 @@
     "express-handlebars": "^5.2.0",
     "express-openid-connect": "^2.2.1",
     "handlebars": "^4.7.6",
+    "pg": "^8.5.1",
     "sequelize": "^6.5.0",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": "14",
+    "npm": "6"
   }
 }

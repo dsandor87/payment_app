@@ -37,7 +37,8 @@ app.get('/', async (req, res) => {
     }
     userMetadata = doesUserExist
     if (userMetadata) {
-    res.render('dashboard', {userMetadata ,user})
+    const friends = Friends.findAll()
+    res.render('dashboard', {userMetadata ,user, friends})
     }
 })
 
@@ -56,6 +57,8 @@ app.post('/addfunds/:id', async (req, res) => {
     res.redirect('/')
 })
 
-app.listen(3000, () => {
-    sequelize.sync().then(() => console.log("All ready for banking"))
+app.listen(process.env.PORT, () => {
+    sequelize.sync(() => {
+        console.log('Kanban app running on port', process.env.PORT)
+    })
 })
