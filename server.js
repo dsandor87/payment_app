@@ -29,15 +29,24 @@ app.use(auth(openIDconfig))
 // app.get('/logout') this is created by express-openid-connect and will end a users token based session
 
 app.get('/', async (req, res) => {
-    console.log(req.oidc.user)
-
-    const user = await User.create({email: req.oidc.user.email, name: req.oidc.user.name, balance: 0})
+    const doesUserExist = await User.findAll({where: { name:req.oidc.user.name, email:req.oidc.user.email }})
+    if (doesUserExist.length == 0){
+    await User.create({email: req.oidc.user.email, name: req.oidc.user.name, balance: 0})
+    }
+    const userArray = await User.findAll({where: { name:req.oidc.user.name, email:req.oidc.user.email }})
+    console.log(userArray)
+    const user = userArray[0]
     if (user) {
     res.render('dashboard', {user})
     
     } else {
         res.send("no user")
     }
+})
+
+app.post('/createUser', async (req,res) => {
+    console.log('i am here')
+    res.redirect('/', {user})
 })
 
 // app.get('/dashboard', (req, res) => {
