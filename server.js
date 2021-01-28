@@ -21,6 +21,7 @@ const openIDconfig = {
 
 app.set('view engine', 'handlebars')
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars)
 app.use(auth(openIDconfig))
 
@@ -29,16 +30,12 @@ app.use(auth(openIDconfig))
 // app.get('/logout') this is created by express-openid-connect and will end a users token based session
 
 app.get('/', async (req, res) => {
-    console.log(req.oidc.user)
     const user = req.oidc.user
     let doesUserExist = await UserMetadata.findOne({where: { sub: user.sub}})
-    console.log('aihdoaijaodijoawij')
-    console.log(doesUserExist)
     if (doesUserExist === null){
     doesUserExist = await UserMetadata.create({sub: user.sub, balance: 0})
     }
     userMetadata = doesUserExist
-    console.log(userMetadata)
     if (userMetadata) {
     res.render('dashboard', {userMetadata ,user})
     }
@@ -53,9 +50,10 @@ app.get('/addfunds/:id', async (req, res)=> {
 app.post('/addfunds/:id', async (req, res) => {
     const userMetadata = await UserMetadata.findOne({where: { id: req.params.id}})
     const user = await UserMetadata.findOne({where: { sub: userMetadata.sub}})
-    const value = req.body.value
-    await userMetadata.update({balance: userMetadata.balance + value})
-    res.redirect('dashboard', {userMetadata ,user})
+    const value = parseInt(req.body.value, 10) + userMetadata.balance
+    console.log(req.body)
+    await userMetadata.update({balance: value})
+    res.redirect('/')
 })
 
 app.listen(3000, () => {
