@@ -26,7 +26,6 @@ const openIDconfig = {
 
 app.set('view engine', 'handlebars')
 app.use(express.json())
-app.use(express.urlencoded())
 app.use(express.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars)
 app.use(auth(openIDconfig))
@@ -44,11 +43,8 @@ app.get('/', requiresAuth(), async (req, res) => {
     doesUserExist = await UserMetadata.create({sub: user.sub, balance: 0})
     }
     userMetadata = doesUserExist
-    if (userMetadata) {
-    const friends = await UserMetadata.findAll()
-    console.log(friends)
-    res.render('dashboard', {userMetadata ,user, friends})
-    }
+    const userMetadataList = await UserMetadata.findAll()
+    res.render('dashboard', {userMetadata ,user, userMetadataList})
     }
 })
 

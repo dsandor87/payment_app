@@ -16,12 +16,9 @@
         <a href="/add_friends"><button>Add Friends</button></a>
         <a href="/friends/invite"><button>Add Friends</button></a>
 
-    {{#each friends}}
-       <h1>{{friends.id}}</h1> 
+    {{#each userMetadataList}}
+       <h1>{{this.balance}}</h1> 
     {{/each}}
-    {{friends[0].balance}}
-    {{friends[1].balance}}
-    {{friends[2].balance}}
 
      
     </div>
