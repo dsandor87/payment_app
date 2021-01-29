@@ -74,8 +74,8 @@ app.get('/friends/accept', requiresAuth(), async (req, res) => {
     const userTo = await UserMetadata.findOne({where: { email: req.query.to}})
     const userFrom = await UserMetadata.findOne({where: { email: req.query.from}})
 
-    const friendFrom = await Friends.create({name: user.name, email: req.query.from})
-    const friendTo = await Friends.create({name: user.name, email: req.query.to})
+    const friendFrom = await Friends.create({name: userFrom.name, email: req.query.from})
+    const friendTo = await Friends.create({name: userTo.name, email: req.query.to})
 
     await userTo.addFriends(friendFrom)
     await userFrom.addFriends(friendTo)
