@@ -13,6 +13,7 @@ class UserMetadata extends Model {}
 
 UserMetadata.init({
     sub: DataTypes.STRING,
+    name: DataTypes.STRING,
     balance: DataTypes.FLOAT,
 }, {sequelize: sequelize})
 
