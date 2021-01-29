@@ -23,7 +23,7 @@ class Mailer {
             from: this.from,
             to: to,
             subject: "Friend request",
-            html: `Hi there, <br/><br/>I would like you to invite you to be my friend,<br/><br/><a style="" href="${process.env.BASEURL}/friends/accept?from=${encodeURIComponent(this.from)}&to=${encodeURIComponent(to)}">Accept Request</a>`,
+            html: `Hi there, <br/><br/>I would like you to invite you to be my friend,<br/><br/><a style="" href="${process.env.BASE_URL_HEROKU}/friends/accept?from=${encodeURIComponent(this.from)}&to=${encodeURIComponent(to)}">Accept Request</a>`,
             replyTo: 'no-reply@banking-app.com'
         }
         this.transport.sendMail(email, (err, result) => {
