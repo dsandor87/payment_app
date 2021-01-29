@@ -9,11 +9,9 @@
 </head>
 <body>
 
-    {{userMetadata.balance}}
-
-    <form action="/addfunds/{{userMetadata.id}}" method="POST">  
-        <label>Value</label>
-        <input type="number" name="value"></input>
+    <form action="/friends/invite" method="POST">  
+        <label>email</label>
+        <input type="email" name="email"></input>
         <button class="button">Submit</button>
     </form>
     
