@@ -74,7 +74,7 @@ app.get('/friends/accept', requiresAuth(), async (req, res) => {
     let user = await UserMetadata.findOne({where: { email: req.query.to}})
     let friend = await Friends.create({name: user.name, email: req.query.from})
     let exist = await Friends.findOne({where: {UserMetadatumId:userMetadata.id}})
-    if(exist != undefined) {
+    if(exist == undefined) {
     await userMetadata.addFriends(friend)
     user = await UserMetadata.findOne({where: { email: req.query.from}})
     friend = await Friends.create({name: user.name, email: req.query.to})
