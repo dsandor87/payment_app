@@ -45,7 +45,8 @@ app.get('/', requiresAuth(), async (req, res) => {
     }
     userMetadata = doesUserExist
     if (userMetadata) {
-    const friends = Friends.findAll()
+    const friends = await UserMetadata.findAll()
+    console.log(friends)
     res.render('dashboard', {userMetadata ,user, friends})
     }
     }
