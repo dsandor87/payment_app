@@ -3,7 +3,7 @@ const app = express()
 const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars')
 const { UserMetadata, Transaction, Friends, sequelize } = require('./models')
-const { auth } = require('express-openid-connect')
+const { auth, requiresAuth } = require('express-openid-connect')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 
@@ -29,11 +29,13 @@ app.use(express.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars)
 app.use(auth(openIDconfig))
 
+
 // app.get('/login') this is created by express-openid-connect and displays a login widget
 // app.get('/callback') this is created by express-openid-connect and fetches an authenticated user their token
 // app.get('/logout') this is created by express-openid-connect and will end a users token based session
 
-app.get('/', async (req, res) => {
+app.get('/', requiresAuth(), async (req, res) => {
+    if (req.oidc.user) {
     const user = req.oidc.user
     let doesUserExist = await UserMetadata.findOne({where: { sub: user.sub}})
     if (doesUserExist === null){
@@ -43,6 +45,7 @@ app.get('/', async (req, res) => {
     if (userMetadata) {
     const friends = Friends.findAll()
     res.render('dashboard', {userMetadata ,user, friends})
+    }
     }
 })
 
