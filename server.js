@@ -79,7 +79,7 @@ app.get('/friends/accept', requiresAuth(), async (req, res) => {
 
     await userTo.addFriends(friendFrom)
     await userFrom.addFriends(friendTo)
-    res.render('dashboard')
+    res.redirect('/')
 })
 
 app.post('/friends/invite', requiresAuth(), (req, res) => {
