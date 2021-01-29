@@ -72,7 +72,7 @@ app.post('/friends/accept', requiresAuth(), async(req, res) => {
     let friend = await Friends.create({name: user.name, email: req.query.to})
     await userMetadata.addFriends(friend)
     user = await userMetadata.findone({where: { email: req.query.from}})
-    let friend = await Friends.create({name: user.name, email: req.query.from})
+    friend = await Friends.create({name: user.name, email: req.query.from})
     await userMetadata.addFriends(friend)
     res.render('dashboard')
 })
