@@ -41,7 +41,7 @@ app.get('/', requiresAuth(), async (req, res) => {
     console.log(user)
     let doesUserExist = await UserMetadata.findOne({where: { sub: user.sub}})
     if (doesUserExist === null){
-    doesUserExist = await UserMetadata.create({name: user.name, sub: user.sub, balance: 0})
+    doesUserExist = await UserMetadata.create({email: user.email, name: user.name, sub: user.sub, balance: 0})
     }
     userMetadata = doesUserExist
     const userMetadataList = await UserMetadata.findAll()
