@@ -45,13 +45,15 @@ app.get('/', requiresAuth(), async (req, res) => {
     }
     userMetadata = doesUserExist
     const userMetadataList = await UserMetadata.findAll()
+    
     res.render('dashboard', {userMetadata ,user, userMetadataList})
     }
 })
 
 app.get('/addfunds/:id', async (req, res)=> {
     const userMetadata = await UserMetadata.findOne({where: { id: req.params.id}})
-    res.render('addfunds', {userMetadata})
+    const friends = await Friends.findAll({where: {UserMetadatumId: userMetadata.id}})
+    res.render('addfunds', {userMetadata, friends})
 })
 
 
@@ -68,15 +70,15 @@ app.get('/friends/invite', requiresAuth(), (req, res) => {
     res.render('friendsinvite')
 })
 
-// app.post('/friends/accept', requiresAuth(), async (req, res) => {
-//     let user = await UserMetadata.findOne({where: { email: req.query.to}})
-//     let friend = await Friends.create({name: user.name, email: req.query.to})
-//     await userMetadata.addFriends(friend)
-//     user = await userMetadata.findone({where: { email: req.query.from}})
-//     friend = await Friends.create({name: user.name, email: req.query.from})
-//     await userMetadata.addFriends(friend)
-//     res.render('dashboard')
-// })
+app.post('/friends/accept', requiresAuth(), async (req, res) => {
+    let user = await UserMetadata.findOne({where: { email: req.query.to}})
+    let friend = await Friends.create({name: user.name, email: req.query.to})
+    await userMetadata.addFriends(friend)
+    user = await userMetadata.findone({where: { email: req.query.from}})
+    friend = await Friends.create({name: user.name, email: req.query.from})
+    await userMetadata.addFriends(friend)
+    res.render('dashboard')
+})
 
 app.post('/friends/invite', requiresAuth(), (req, res) => {
     const email = req.body.email
