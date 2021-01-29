@@ -5,6 +5,7 @@ const expressHandlebars = require('express-handlebars')
 const { UserMetadata, Transaction, Friends, sequelize } = require('./models')
 const { auth, requiresAuth } = require('express-openid-connect')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const Mailer = require('./mailer')
 
 
 const handlebars = expressHandlebars({
@@ -25,6 +26,7 @@ const openIDconfig = {
 
 app.set('view engine', 'handlebars')
 app.use(express.json())
+app.use(express.urlencoded())
 app.use(express.urlencoded({ extended: true }))
 app.engine('handlebars', handlebars)
 app.use(auth(openIDconfig))
@@ -62,6 +64,13 @@ app.post('/addfunds/:id', async (req, res) => {
     console.log(req.body)
     await userMetadata.update({balance: value})
     res.redirect('/')
+})
+
+app.post('/friends/invite', requiresAuth(), (req, res) => {
+    const email = req.body.email
+    const mailer = new Mailer(req.oidc.user.email)
+    mailer.sendEmailInvite(email)
+    res.sendStatus(201)
 })
 
 app.listen(process.env.PORT || 3000, () => {
