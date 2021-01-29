@@ -67,15 +67,15 @@ app.get('/friends/invite', requiresAuth(), (req, res) => {
     res.render('friendsinvite')
 })
 
-app.post('/friends/accept', requiresAuth(), async (req, res) => {
-    let user = await UserMetadata.findOne({where: { email: req.query.to}})
-    let friend = await Friends.create({name: user.name, email: req.query.to})
-    await userMetadata.addFriends(friend)
-    user = await userMetadata.findone({where: { email: req.query.from}})
-    friend = await Friends.create({name: user.name, email: req.query.from})
-    await userMetadata.addFriends(friend)
-    res.render('dashboard')
-})
+// app.post('/friends/accept', requiresAuth(), async (req, res) => {
+//     let user = await UserMetadata.findOne({where: { email: req.query.to}})
+//     let friend = await Friends.create({name: user.name, email: req.query.to})
+//     await userMetadata.addFriends(friend)
+//     user = await userMetadata.findone({where: { email: req.query.from}})
+//     friend = await Friends.create({name: user.name, email: req.query.from})
+//     await userMetadata.addFriends(friend)
+//     res.render('dashboard')
+// })
 
 app.post('/friends/invite', requiresAuth(), (req, res) => {
     const email = req.body.email
