@@ -70,7 +70,7 @@ app.get('/friends/invite', requiresAuth(), (req, res) => {
     res.render('friendsinvite')
 })
 
-app.post('/friends/accept', requiresAuth(), async (req, res) => {
+app.get('/friends/accept', requiresAuth(), async (req, res) => {
     let user = await UserMetadata.findOne({where: { email: req.query.to}})
     let friend = await Friends.create({name: user.name, email: req.query.to})
     await userMetadata.addFriends(friend)
