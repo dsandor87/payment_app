@@ -1,4 +1,224 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+ </head>
+ <body>
+     <style
+ >body {
+     padding-left: 600px;
+    padding-right: 600px;
+
+  font-family: tahoma;
+  height: 100vh;
+  background-image: url(https://picsum.photos/g/3000/2000?blur=2);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.our-team {
+  padding: 30px 0 40px;
+  margin-bottom: 30px;
+  background-color: #f7f5ec;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.our-team .picture {
+  display: inline-block;
+  height: 130px;
+  width: 130px;
+  margin-bottom: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.our-team .picture::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: 135%;
+  right: 0;
+  left: 0;
+  opacity: 0.9;
+  transform: scale(3);
+  transition: all 0.3s linear 0s;
+}
+
+.our-team:hover .picture::before {
+  height: 100%;
+}
+
+.our-team .picture::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image:url("");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.our-team .picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.9s ease 0s;
+}
+
+.our-team:hover .picture img {
+  box-shadow: 0 0 0 14px #f7f5ec;
+  transform: scale(0.7);
+}
+
+.our-team .title {
+  display: block;
+  font-size: 15px;
+  color: #4e5052;
+
+}
+
+.our-team .social {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  transition: all 0.5s ease 0s;
+}
+
+.our-team:hover .social {
+  bottom: 0;
+}
+
+.our-team .social li {
+  display: inline-block;
+}
+
+.our-team .social li a {
+  display: block;
+  padding: 10px;
+  font-size: 17px;
+  color: white;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+
+.our-team .social li a:hover {
+  color: #1369ce;
+  background-color: #f7f5ec;
+}</style>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-12">
+      <div class="our-team">
+        <div class="picture">
+          <img class="img-fluid" src="https://www.pngfind.com/pngs/m/200-2002021_money-logo-transparent-transparent-background-emblem-hd-png.png">
+        </div>
+        <div class="team-content">
+        
+          <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+               <div class="col-10 col-md-8 col-lg-6">
+            <!-- Form -->
+                  <form class="form-example" action="/addfunds/{{userMetadata.id}}" method="POST">
+                      <h1>£{{userMetadata.balance}}</h1>
+                      <p class="description">Top up your balance</p>
+                      <!-- Input fields -->
+                      <div class="form-group">
+                          {{!-- <label for="value">Value:</label> --}}
+                          <input type="text" class="form-control value" id="value" placeholder="Value" name="value">
+                      </div>
+                    <br>
+                      <button style="padding: 12px;" type="submit" class="btn btn-primary btn-customized">Submit</button>
+
+                    
+                
+                  </form>
+        </div>
+    </div>
+</div>
+<form action="/addfunds/{{userMetadata.id}}" method="POST">  
+
+
+
+        </div>
+
+        
+        <ul class="social">
+             <div class="row no-gutters">
+    <div style="padding: 10px;" class="col-sm-4">
+         <a href="/addFunds/{{userMetadata.id}}"><i style="color: springgreen;" class="far fa-money-bill-alt fa-lg"></i></a>
+    </div>
+    <div style="padding: 10px;" class="col-sm-4">
+        <a href="/send_funds"><i style="color:peru" class="fa fa-paper-plane fa-lg"></i></a> <i ></i>
+    </div>
+    <div  style="padding: 10px;"class="col-sm-4">
+        <a href="/friends/invite"><i  style="color:goldenrod"class="fas fa-user-plus fa-lg"></i></a>
+    </div>
+  </div>
+        </ul>
+      </div>
+    </div>
+       
+    </div>
+  </div>
+</div>
+
+{{!-- <main>
+
+
+  
+    <div class="contents">
+        <div class="topnav">
+        <a class="topnav-button-active" href="/home">Add Funds</a>
+        <a class="topnav-button" href="/form">Form</a>
+        <a class="topnav-button" href="/about">About</a>
+      </div>
+
+     <h1> £{{userMetadata.balance}} </h1>
+     
+     <h3>
+        {{user.name}}</h3>
+        <a href="/addFunds/{{userMetadata.id}}"><button>Add Funds</button></a>
+        <a href="/send_funds"><button>Send Funds</button></a>
+        <a href="/add_friends"><button>Add Friends</button></a>
+        <a href="/friends/invite"><button>Add Friends</button></a>
+
+
+
+     
+    </div>
+</main> --}}
+     
+ </body>
+ </html>
+ 
+
+
+
+
+
+{{!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,4 +240,4 @@
     {{this.name}}
     {{/each}}
 </body>
-</html>
+</html> --}}
