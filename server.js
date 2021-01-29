@@ -43,7 +43,7 @@ app.get('/', requiresAuth(), async (req, res) => {
     doesUserExist = await UserMetadata.create({name: user.name, sub: user.sub, balance: 0})
     }
     userMetadata = doesUserExist
-    const userMetadataList = await UserMetadata.fisndAll()
+    const userMetadataList = await UserMetadata.findAll()
     res.render('dashboard', {userMetadata ,user, userMetadataList})
     }
 })
