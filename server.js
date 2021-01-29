@@ -48,13 +48,13 @@ app.get('/', requiresAuth(), async (req, res) => {
     }
 })
 
-app.get('/addfunds/:id',requiresAuth(), async (req, res)=> {
+app.get('/addfunds/:id', async (req, res)=> {
     const userMetadata = await UserMetadata.findOne({where: { id: req.params.id}})
     res.render('addfunds', {userMetadata})
 })
 
 
-app.post('/addfunds/:id',requiresAuth(), async (req, res) => {
+app.post('/addfunds/:id', async (req, res) => {
     const userMetadata = await UserMetadata.findOne({where: { id: req.params.id}})
     const user = await UserMetadata.findOne({where: { sub: userMetadata.sub}})
     const value = parseInt(req.body.value, 10) + userMetadata.balance
@@ -67,7 +67,7 @@ app.get('/friends/invite', requiresAuth(), (req, res) => {
     res.render('friendsinvite')
 })
 
-app.post('/friends/accept', requiresAuth(), async(req, res) => {
+app.post('/friends/accept', requiresAuth(), async (req, res) => {
     let user = await UserMetadata.findOne({where: { email: req.query.to}})
     let friend = await Friends.create({name: user.name, email: req.query.to})
     await userMetadata.addFriends(friend)
