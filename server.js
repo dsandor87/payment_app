@@ -18,9 +18,9 @@ if(process.env.NODE_ENV !== 'production') {
 const openIDconfig = {
     authRequired: false,
     auth0Logout: true,
-    secret: 'a long, randomly-generated string stored in env that you make up',
-    baseURL: 'http://localhost:3000',
-    clientID: 'dFHtLvHeKYiczIEE5nRPltX3W4Fawntl',
+    secret: process.env.AUTH_SECRET,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.AUTH_CLIENT_ID,
   issuerBaseURL: 'https://dev-yb35qxkb.eu.auth0.com'}
 
 app.set('view engine', 'handlebars')
