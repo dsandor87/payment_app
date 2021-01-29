@@ -39,6 +39,7 @@ app.use(auth(openIDconfig))
 app.get('/', requiresAuth(), async (req, res) => {
     if (req.oidc.user) {
     const user = req.oidc.user
+    console.log(user)
     let doesUserExist = await UserMetadata.findOne({where: { sub: user.sub}})
     if (doesUserExist === null){
     doesUserExist = await UserMetadata.create({sub: user.sub, balance: 0})

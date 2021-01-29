@@ -1,5 +1,175 @@
 
-<main>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+ </head>
+ <body>
+     <style
+ >body {
+     padding-left: 600px;
+    padding-right: 600px;
+
+  font-family: tahoma;
+  height: 100vh;
+  background-image: url(https://picsum.photos/g/3000/2000?blur=2);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.our-team {
+  padding: 30px 0 40px;
+  margin-bottom: 30px;
+  background-color: #f7f5ec;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.our-team .picture {
+  display: inline-block;
+  height: 130px;
+  width: 130px;
+  margin-bottom: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.our-team .picture::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: 135%;
+  right: 0;
+  left: 0;
+  opacity: 0.9;
+  transform: scale(3);
+  transition: all 0.3s linear 0s;
+}
+
+.our-team:hover .picture::before {
+  height: 100%;
+}
+
+.our-team .picture::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.our-team .picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.9s ease 0s;
+}
+
+.our-team:hover .picture img {
+  box-shadow: 0 0 0 14px #f7f5ec;
+  transform: scale(0.7);
+}
+
+.our-team .title {
+  display: block;
+  font-size: 15px;
+  color: #4e5052;
+
+}
+
+.our-team .social {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  transition: all 0.5s ease 0s;
+}
+
+.our-team:hover .social {
+  bottom: 0;
+}
+
+.our-team .social li {
+  display: inline-block;
+}
+
+.our-team .social li a {
+  display: block;
+  padding: 10px;
+  font-size: 17px;
+  color: white;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.our-team .social li a:hover {
+  color: #1369ce;
+  background-color: #f7f5ec;
+}</style>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-12">
+      <div class="our-team">
+        <div class="picture">
+          <img class="img-fluid" src="https://scontent-lhr8-1.xx.fbcdn.net/v/t1.0-9/67342502_2900601023297998_337665552807886848_n.jpg?_nc_cat=111&ccb=2&_nc_sid=09cbfe&_nc_ohc=dWF5PDjNQtcAX-fMI2_&_nc_ht=scontent-lhr8-1.xx&oh=c816d2bd7c5d73db33b714929789d140&oe=6038AB2C">
+                    {{!-- <img class="img-fluid" src="{{user.pictures}}"> --}}
+
+        </div>
+        <div class="team-content">
+          <h3 class="name">{{user.name}}</h3>
+        <h4 class="">
+            £{{userMetadata.balance}}
+        </h4>
+
+          <h4 class="title">{{user.email}}</h4>
+
+        </div>
+
+        
+        <ul class="social">
+             <div class="row no-gutters">
+    <div style="padding: 10px;" class="col-sm-4">
+         <a href="/addFunds/{{userMetadata.id}}"><i style="color: springgreen;" class="far fa-money-bill-alt fa-lg"></i></a>
+    </div>
+    <div style="padding: 10px;" class="col-sm-4">
+        <a href="/send_funds"><i style="color:peru" class="fa fa-paper-plane fa-lg"></i></a> <i ></i>
+    </div>
+    <div  style="padding: 10px;"class="col-sm-4">
+        <a href="/friends/invite"><i  style="color:goldenrod"class="fas fa-user-plus fa-lg"></i></a>
+    </div>
+  </div>
+        </ul>
+      </div>
+    </div>
+       
+    </div>
+  </div>
+</div>
+
+{{!-- <main>
+
+
+  
     <div class="contents">
         <div class="topnav">
         <a class="topnav-button-active" href="/home">Add Funds</a>
@@ -20,4 +190,8 @@
 
      
     </div>
-</main>
+</main> --}}
+     
+ </body>
+ </html>
+ 
